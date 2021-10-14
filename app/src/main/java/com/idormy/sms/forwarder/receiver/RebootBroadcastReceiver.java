@@ -17,7 +17,7 @@ public class RebootBroadcastReceiver extends BroadcastReceiver {
         String TAG = "RebootBroadcastReceiver";
         Log.d(TAG, "onReceive intent " + receiveAction);
         if (receiveAction.equals("android.intent.action.BOOT_COMPLETED")) {
-            InitUtil.init(context);
+            InitUtil.init();
             Intent frontServiceIntent = new Intent(context, FrontService.class);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 context.startForegroundService(frontServiceIntent);

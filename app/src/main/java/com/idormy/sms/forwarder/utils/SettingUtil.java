@@ -6,21 +6,20 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.idormy.sms.forwarder.MyApplication;
+
 @SuppressWarnings({"SynchronizeOnNonFinalField", "unused"})
 public class SettingUtil {
     static Boolean hasInit = false;
     private static final String TAG = "SettingUtil";
     private static SharedPreferences sp_setting = null;
-    @SuppressLint("StaticFieldLeak")
-    private static Context context = null;
 
-    public static void init(Context context1) {
+    public static void init() {
         synchronized (hasInit) {
             if (hasInit) return;
             hasInit = true;
-            context = context1;
             Log.d(TAG, "init ");
-            sp_setting = PreferenceManager.getDefaultSharedPreferences(context1);
+            sp_setting = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
         }
     }
 
