@@ -1,6 +1,7 @@
 package com.idormy.sms.forwarder.sender;
 
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -30,7 +31,7 @@ public class SenderTelegramMsg extends SenderBaseMsg {
 
     static final String TAG = "SenderTelegramMsg";
 
-    public static void sendMsg(final long logId, final Handler handError, String apiToken, String chatId, String from, String text) throws Exception {
+    public static void sendMsg(final long logId, final Handler handError, String apiUrl, String apiToken, String chatId, String from, String text) throws Exception {
         Log.i(TAG, "sendMsg apiToken:" + apiToken + " chatId:" + chatId + " text:" + text);
 
         if (apiToken == null || apiToken.isEmpty()) {
@@ -40,7 +41,12 @@ public class SenderTelegramMsg extends SenderBaseMsg {
         //特殊处理避免标题重复
         text = text.replaceFirst("^" + from + "(.*)", "").replaceAll("#", "井").trim();
 
-        final String requestUrl = "https://api.telegram.org/bot" + apiToken + "/sendMessage";
+        final String requestUrl;
+        if (TextUtils.isEmpty(apiUrl)) {
+            requestUrl = "https://api.telegram.org/bot" + apiToken + "/sendMessage";
+        } else {
+            requestUrl = apiUrl + "/bot" + apiToken + "/sendMessage";
+        }
         Log.i(TAG, "requestUrl:" + requestUrl);
 
         Map bodyMap = new HashMap();

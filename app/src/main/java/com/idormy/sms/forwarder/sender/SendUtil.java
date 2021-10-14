@@ -220,7 +220,7 @@ public class SendUtil {
                     TelegramSettingVo telegramSettingVo = JSON.parseObject(senderModel.getJsonSetting(), TelegramSettingVo.class);
                     if (telegramSettingVo != null) {
                         try {
-                            SenderTelegramMsg.sendMsg(logId, handError, telegramSettingVo.getApiToken(), telegramSettingVo.getChatId(), smsVo.getMobile(), smsVo.getSmsVoForSend());
+                            SenderTelegramMsg.sendMsg(logId, handError, telegramSettingVo.getApiUrl(), telegramSettingVo.getApiToken(), telegramSettingVo.getChatId(), smsVo.getMobile(), smsVo.getSmsVoForSend());
                         } catch (Exception e) {
                             LogUtil.updateLog(logId, 0, e.getMessage());
                             Log.e(TAG, "senderSendMsg: SenderTelegramMsg error " + e.getMessage());

@@ -925,7 +925,9 @@ public class SenderActivity extends AppCompatActivity {
         final EditText editTextTelegramChatId = view1.findViewById(R.id.editTextTelegramChatId);
         if (telegramSettingVo != null)
             editTextTelegramChatId.setText(telegramSettingVo.getChatId());
-
+        final EditText editTextTelegramApiUrl = view1.findViewById(R.id.editTextTelegramApiUrl);
+        if (telegramSettingVo != null)
+            editTextTelegramApiUrl.setText(telegramSettingVo.getApiUrl());
         Button buttonTelegramOk = view1.findViewById(R.id.buttonTelegramOk);
         Button buttonTelegramDel = view1.findViewById(R.id.buttonTelegramDel);
         Button buttonTelegramTest = view1.findViewById(R.id.buttonTelegramTest);
@@ -945,7 +947,8 @@ public class SenderActivity extends AppCompatActivity {
                 newSenderModel.setStatus(STATUS_ON);
                 TelegramSettingVo telegramSettingVoNew = new TelegramSettingVo(
                         editTextTelegramApiToken.getText().toString(),
-                        editTextTelegramChatId.getText().toString()
+                        editTextTelegramChatId.getText().toString(),
+                        editTextTelegramApiUrl.getText().toString()
                 );
                 newSenderModel.setJsonSetting(JSON.toJSONString(telegramSettingVoNew));
                 SenderUtil.addSender(newSenderModel);
@@ -957,7 +960,8 @@ public class SenderActivity extends AppCompatActivity {
                 senderModel.setStatus(STATUS_ON);
                 TelegramSettingVo telegramSettingVoNew = new TelegramSettingVo(
                         editTextTelegramApiToken.getText().toString(),
-                        editTextTelegramChatId.getText().toString()
+                        editTextTelegramChatId.getText().toString(),
+                        editTextTelegramApiUrl.getText().toString()
                 );
                 senderModel.setJsonSetting(JSON.toJSONString(telegramSettingVoNew));
                 SenderUtil.updateSender(senderModel);
@@ -979,9 +983,10 @@ public class SenderActivity extends AppCompatActivity {
         buttonTelegramTest.setOnClickListener(view -> {
             String apiToken = editTextTelegramApiToken.getText().toString();
             String chatId = editTextTelegramChatId.getText().toString();
+            String apiUrl = editTextTelegramApiUrl.getText().toString();
             if (!apiToken.isEmpty() && !chatId.isEmpty()) {
                 try {
-                    SenderTelegramMsg.sendMsg(0, handler, apiToken, chatId, getString(R.string.test_phone_num), getString(R.string.test_sms));
+                    SenderTelegramMsg.sendMsg(0, handler, apiUrl, apiToken, chatId, getString(R.string.test_phone_num), getString(R.string.test_sms));
                 } catch (Exception e) {
                     Toast.makeText(SenderActivity.this, getString(R.string.failed_to_fwd) + e.getMessage(), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
