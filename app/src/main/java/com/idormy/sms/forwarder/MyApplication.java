@@ -32,6 +32,8 @@ public class MyApplication extends Application {
     public static String QyWxAccessToken;
     public static long QyWxAccessTokenExpiresIn = 0;
 
+    private static Context mContext;
+
     /**
      * <meta-data
      * android:name="UMENG_CHANNEL"
@@ -75,6 +77,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         Log.d(TAG, "onCreate");
         super.onCreate();
+        mContext = getApplicationContext();
+
         //初始化组件化基础库, 所有友盟业务SDK都必须调用此初始化接口。
         //建议在宿主App的Application.onCreate函数中调用基础组件库初始化函数。
         UMConfigure.init(this, "60254fc7425ec25f10f4293e", getChannelName(this), UMConfigure.DEVICE_TYPE_PHONE, "");
@@ -98,4 +102,9 @@ public class MyApplication extends Application {
         showHelpTip = sp.getBoolean(Define.SP_CONFIG_SWITCH_HELP_TIP, true);
 
     }
+
+    public static Context getContext(){
+        return mContext;
+    }
+
 }
