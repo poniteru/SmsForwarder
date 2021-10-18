@@ -84,14 +84,14 @@
             android:name=".SenderActivity"
             android:label="@string/sender_setting" />
 
-        <receiver
-            android:name=".receiver.RebootBroadcastReceiver"
-            tools:ignore="IntentFilterExportedReceiver">
-            <intent-filter android:priority="2147483647">
-                <!--重启广播-->
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
+<!--        <receiver-->
+<!--            android:name=".receiver.RebootBroadcastReceiver"-->
+<!--            tools:ignore="IntentFilterExportedReceiver">-->
+<!--            <intent-filter android:priority="2147483647">-->
+<!--                &lt;!&ndash;重启广播&ndash;&gt;-->
+<!--                <action android:name="android.intent.action.BOOT_COMPLETED" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
         <receiver
             android:name=".receiver.SmsForwarderBroadcastReceiver"
             android:permission="android.permission.BROADCAST_SMS"
