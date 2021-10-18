@@ -39,7 +39,7 @@ public class SenderMailMsg extends SenderBaseMsg {
                         Draft draft = new Draft()
                                 .setNickname(nickname)   //发件人昵称
                                 .setTo(toAdd)                  //收件人邮箱
-                                .setSubject(title)             //邮件主题
+                                .setSubject("【转发消息】" + title)             //邮件主题
                                 .setText(content);             //邮件正文
 
                         //使用SMTP服务发送邮件
