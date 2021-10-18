@@ -81,16 +81,21 @@ public class MyApplication extends Application {
 //        //pro close log
 //        UMConfigure.setLogEnabled(true);
 
-        Intent intent = new Intent(this, FrontService.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(intent);
-        } else {
-            startService(intent);
-        }
+//        Intent intent = new Intent(this, FrontService.class);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            startForegroundService(intent);
+//        } else {
+//            startService(intent);
+//        }
         SendHistory.init(this);
         SettingUtil.init(this);
 
         EmailKit.initialize(this);
+
+        if (MyApplication.SimInfoList.isEmpty()) {
+            PhoneUtils.init(this);
+            MyApplication.SimInfoList = PhoneUtils.getSimMultiInfo();
+        }
 
         SharedPreferences sp = MyApplication.this.getSharedPreferences(Define.SP_CONFIG, Context.MODE_PRIVATE);
         showHelpTip = sp.getBoolean(Define.SP_CONFIG_SWITCH_HELP_TIP, true);
